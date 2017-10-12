@@ -5,17 +5,17 @@ public class BankingApp {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		Bank myBank = new Bank();
-		
+
 		myBank.addAccount("1111", new BankAccount("1111", "Checking", 17.38));
 		myBank.addAccount("2222", new BankAccount("2222", "Savings", 350.00));
-		
+
 		System.out.println("Here are your current accounts at our bank: ");
 		for (BankAccount current : myBank.accountsDisplay()) {
 			System.out.println(current.getType() + " " + current.getBalance());
-		}				
+		}
 		menu();
 		int selection = input.nextInt();
-		while ((selection < -1 || selection > 4)&& selection != 0) {
+		while (selection < -1 || selection > 4 || selection == 0) {
 			System.out.println("You have entered an invalid choice.");
 			menu();
 			selection = input.nextInt();
@@ -30,10 +30,11 @@ public class BankingApp {
 				System.out.println("You have selected " + enteredAccount);
 				System.out.println("Please enter a deposit amount: ");
 				amount = input.nextDouble();
-				myBank.accounts.get(enteredAccount).deposit(amount);;
+				myBank.accounts.get(enteredAccount).deposit(amount);
+				;
 				System.out.println("Your updated balance is " + myBank.accounts.get(enteredAccount).getBalance());
 			}
-			
+
 			if (selection == 2) {
 				System.out.println("You would like to withdraw.");
 				showAccounts(myBank);
@@ -48,7 +49,8 @@ public class BankingApp {
 					System.out.println("How much would you like to withdraw?");
 					amount = input.nextDouble();
 				}
-				myBank.accounts.get(enteredAccount).withdraw(amount);;
+				myBank.accounts.get(enteredAccount).withdraw(amount);
+				;
 				System.out.println("Your updated balance is " + myBank.accounts.get(enteredAccount).getBalance());
 			}
 			if (selection == 3) {
@@ -64,7 +66,7 @@ public class BankingApp {
 				myBank.closeAccount(enteredAccount);
 				showAccounts(myBank);
 			}
-			
+
 			if (selection == -1) {
 				System.out.println("Thanks for banking with us. Have a nice day!");
 				System.exit(0);
@@ -90,16 +92,12 @@ public class BankingApp {
 	public static void showAccounts(Bank myBank) {
 		System.out.println("Here are your accounts:");
 		for (BankAccount current : myBank.accountsDisplay()) {
-			System.out.println("(" + current.getAccountNum()  + ") " + current.getType() + " " + current.getBalance());
+			System.out.println("(" + current.getAccountNum() + ") " + current.getType() + " " + current.getBalance());
 		}
 	}
-	
+
 	public static void menu() {
-		System.out.println("\nWhat would you like to do? "
-				+ "\nPress 1 to deposit"
-				+ "\nPress 2 to withdraw"
-				+ "\nPress 3 to check balance"
-				+ "\nPress 4 to close an account"
-				+ "\nPress -1 to exit");
-}
+		System.out.println("\nWhat would you like to do? " + "\nPress 1 to deposit" + "\nPress 2 to withdraw"
+				+ "\nPress 3 to check balance" + "\nPress 4 to close an account" + "\nPress -1 to exit");
+	}
 }

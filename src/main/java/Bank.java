@@ -13,19 +13,12 @@ public class Bank {
 	public Collection<BankAccount> accountsDisplay() {
 		return accounts.values();
 	}
-	
+
 	public boolean allowAccess(String enteredAccount) {
 		return accounts.containsKey(enteredAccount);
 	}
-	
-	
+
 	public void closeAccount(String accountNum) {
 		accounts.remove(accountNum);
 	}
-	
-
-	
-
 }
-
-
